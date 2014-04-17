@@ -1,0 +1,100 @@
+<html>
+<head>	
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<style>
+#instructions { font-family: Calibri, Verdana; font-size: large; margin: 20px; width: 600px; }
+</style>
+<style id="clearly_highlighting_css" type="text/css">/* selection */ html.clearly_highlighting_enabled ::-moz-selection { background: rgba(246, 238, 150, 0.99); } html.clearly_highlighting_enabled ::selection { background: rgba(246, 238, 150, 0.99); } /* cursor */ html.clearly_highlighting_enabled {    /* cursor and hot-spot position -- requires a default cursor, after the URL one */    cursor: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--cursor.png") 14 16, text; } /* highlight tag */ em.clearly_highlight_element {    font-style: inherit !important; font-weight: inherit !important;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow.png");    background-repeat: repeat-x; background-position: top left; background-size: 100% 100%; } /* the delete-buttons are positioned relative to this */ em.clearly_highlight_element.clearly_highlight_first { position: relative; } /* delete buttons */ em.clearly_highlight_element a.clearly_highlight_delete_element {    display: none; cursor: pointer;    padding: 0; margin: 0; line-height: 0;    position: absolute; width: 34px; height: 34px; left: -17px; top: -17px;    background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--delete-sprite.png"); background-repeat: no-repeat; background-position: 0px 0px; } em.clearly_highlight_element a.clearly_highlight_delete_element:hover { background-position: -34px 0px; } /* retina */ @media (min--moz-device-pixel-ratio: 2), (-webkit-min-device-pixel-ratio: 2), (min-device-pixel-ratio: 2) {    em.clearly_highlight_element { background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--yellow@2x.png"); }    em.clearly_highlight_element a.clearly_highlight_delete_element { background-image: url("chrome-extension://pioclpoplcdbaefihamjohnefbikjilc/clearly/images/highlight--delete-sprite@2x.png"); background-size: 68px 34px; } } </style><style type="text/css"></style><style>[touch-action="none"]{ -ms-touch-action: none; touch-action: none; }[touch-action="pan-x"]{ -ms-touch-action: pan-x; touch-action: pan-x; }[touch-action="pan-y"]{ -ms-touch-action: pan-y; touch-action: pan-y; }[touch-action="scroll"],[touch-action="pan-x pan-y"],[touch-action="pan-y pan-x"]{ -ms-touch-action: pan-x pan-y; touch-action: pan-x pan-y; }</style></head>
+<body>
+<div id="instructions">
+This page demonstrates the Perceptron algorithm. Points with black circles are currently misclassified. Click them to move the decision boundary!
+</div>
+
+	<div id="display"><svg height="600" width="600"><line x1="300" x2="300" y1="0" y2="600" style="stroke: #cccccc;"></line><line y1="300" y2="300" x1="0" x2="600" style="stroke: #cccccc;"></line><line x1="300" y1="300" x2="217.4826596345237" y2="242.10750418998515" stroke="black" stroke-width="3"></line><line x1="0" x2="600" y1="727.60640672466" y2="-127.60640672466002" style="stroke: #aaaaaa;"></line><circle cx="162.96122853376286" cy="126.35494592489636" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="244.4646263525972" cy="243.64327290158707" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="275.8714804420989" cy="229.4328887873869" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="235.18975197989042" cy="135.6310671672748" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="163.11396009045146" cy="165.20783159099483" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="189.60166784000234" cy="271.25499463677295" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="135.92213194356276" cy="280.25418450006777" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="165.93367867461396" cy="262.43897345694194" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="223.91767067547084" cy="226.92105743919865" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="181.50110207259272" cy="258.1193042843801" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="293.15252719777226" cy="193.53916858675387" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="302.25177042751756" cy="309.1315723268097" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: #000000;"></circle><circle cx="277.8153361463726" cy="278.41739597690304" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="221.24725684327225" cy="317.6434333532901" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="206.3611750153083" cy="103.28050444265074" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="160.2776655979329" cy="163.36440206995337" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="249.4670574415975" cy="306.0500302426713" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="239.6933604952424" cy="215.5276933416609" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="106.48997425358749" cy="240.63911269209603" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="344.75749326289633" cy="231.42808268345055" r="5" style="stroke-width: 2px; fill: #8888cc; stroke: none;"></circle><circle cx="402.4269614185686" cy="372.54143545582906" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="332.75713755600674" cy="295.6727685609934" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="299.65980925617293" cy="391.4080801899015" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="359.0113397899508" cy="396.86668785687243" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="354.6016443107663" cy="311.553767959048" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="423.81834158048724" cy="289.46716598835195" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="272.1390679117286" cy="404.25598808666166" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="357.58071493821535" cy="318.2986128726998" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="354.8154082576522" cy="303.4262900273147" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="314.77646414488095" cy="390.01551377345515" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="360.55286153910214" cy="471.7605478452905" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="277.87931196013403" cy="491.6974012289464" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="430.373346282605" cy="359.09449834796146" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="367.90119183402896" cy="377.31946556097284" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="249.6661429848008" cy="410.1050225493103" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="309.8523813932803" cy="487.979653426551" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="367.54930498603045" cy="415.2609809055345" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="435.8449175611279" cy="279.8082351631477" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle><circle cx="251.25094853069038" cy="326.9479145706186" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: #000000;"></circle><circle cx="233.37992373669627" cy="433.8646279055369" r="5" style="stroke-width: 2px; fill: #cc8888; stroke: none;"></circle></svg></div>
+	
+<script>
+
+var learningRate = 0.05;
+
+var normalGenerator = d3.random.normal();
+
+var weights = { x: normalGenerator(), y: normalGenerator() };
+
+var trainingData = [];
+for (var i = 0; i < 20; i++) {
+	trainingData.push({ x: normalGenerator() - 1, y: normalGenerator() + 1, label: 1 });
+}
+for (var i = 0; i < 20; i++) {
+	trainingData.push({ x: normalGenerator() + 1, y: normalGenerator() - 1, label: -1 });
+}
+
+var height = 600;
+var width = 600;
+
+var svg = d3.select("#display").append("svg").attr("height", height).attr("width", width);
+var xScale = d3.scale.linear().domain([-5, 5]).range([0, width]);
+var yScale = d3.scale.linear().domain([-5, 5]).range([height, 0]);
+
+var inverseXScale = d3.scale.linear().domain([0, width]).range([-5, 5]);
+
+var fill = function(point) { if (point.label > 0) { return "#88c"; } else { return "#c88"; } };
+var stroke = function(point) {
+	  var prediction = point.x * weights.x + point.y * weights.y;
+	  if (prediction * point.label > 0) { return "none"; } else { return "black"; }
+  };
+  
+  // Axes
+  svg.append("line").attr("x1", xScale(0)).attr("x2", xScale(0))
+    .attr("y1", 0).attr("y2", height)
+    .style("stroke", "#cccccc");
+  svg.append("line").attr("y1", yScale(0)).attr("y2", yScale(0))
+    .attr("x1", 0).attr("x2", width)
+    .style("stroke", "#cccccc");
+  
+
+var classifier = svg.append("line")
+  .attr("x1", xScale(0)).attr("y1", yScale(0))
+  .attr("x2", xScale(weights.x)).attr("y2", yScale(weights.y))
+  .attr("stroke", "black").attr("stroke-width", 3);
+  
+var separator = svg.append("line")
+.attr("x1", 0).attr("x2", width)
+.attr("y1", yScale( -weights.x * inverseXScale(0) / weights.y ))
+.attr("y2", yScale( -weights.x * inverseXScale(width) / weights.y ))
+.style("stroke", "#aaa");
+
+var points = svg.selectAll("circle").data(trainingData).enter().append("circle")
+  .attr("cx", function(point) { return xScale(point.x); })
+  .attr("cy", function(point) { return yScale(point.y); })
+  .attr("r", 5)
+  .style("stroke-width", 2)
+  .style("fill", fill)
+  .style("stroke", stroke);
+
+var update = function(point) {
+  var prediction = point.x * weights.x + point.y * weights.y;
+  console.log(prediction);
+  
+  if (prediction * point.label <= 0) {
+	  weights.x += learningRate * point.label * point.x;
+	  weights.y += learningRate * point.label * point.y;
+  }
+  
+  points.data(trainingData).transition()
+  .style("fill", fill)
+  .style("stroke", stroke);
+  
+  classifier.transition()
+    .attr("x2", xScale(weights.x)).attr("y2", yScale(weights.y));
+	separator.transition()
+	.attr("y1", yScale( -weights.x * inverseXScale(0) / weights.y ))
+	.attr("y2", yScale( -weights.x * inverseXScale(width) / weights.y ));
+	
+};
+
+points.on("click", update);
+
+</script>
+
+</body>
+</html>
