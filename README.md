@@ -5,4 +5,4 @@ This is a repository which contains a compilation of some code for understanding
 
 **Descriptions:**
 
-perceptron.html - A visualization of the perceptron algorithm with interactivity for fixing mis-classified points.
+perceptron.html - A visualization of the perceptron algorithm with interactivity for fixing mis-classified points. Sample picture here: https://github.com/shionguha/teachingstats/blob/master/perceptron.png
