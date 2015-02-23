@@ -8,3 +8,5 @@ This is a repository which contains a compilation of some code for understanding
 perceptron.html - A visualization of the perceptron algorithm with interactivity for fixing mis-classified points. Sample picture here: https://github.com/shionguha/teachingstats/blob/master/perceptron.png
 
 freq_versus_bayes_agree.R - A mini tutorial demonstrating a simple 2 group comparison using both frequentist as well as Bayesian perspectives as well as showing an example of when these 2 approaches agree well with each other.
+
+viz_understanding.R - A poorly performing naive time series model on weightlifting data to demonstrate why analysis without visualization is not a great idea.
